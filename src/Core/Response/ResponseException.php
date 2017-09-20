@@ -8,22 +8,13 @@
  * file that was distributes with this source code.
  */
 
-namespace terenaa\Core\Command;
+namespace Core\Response;
 
 
 /**
- * Interface CommandSetInterface
- * @package terenaa\Core\Command
+ * Class ResponseException
+ * @package Core\Response
  */
-interface CommandSetInterface
+class ResponseException extends \Exception
 {
-    /**
-     * @return array
-     */
-    public function getMethods();
-
-    /**
-     * @return array
-     */
-    public function help();
 }

@@ -8,13 +8,21 @@
  * file that was distributes with this source code.
  */
 
-require_once dirname(__FILE__) . '/src/autoload.php';
+define('ROOT', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 
-$request = new \terenaa\Core\Request();
+if (file_exists(ROOT . 'vendor/autoload.php')) {
+    require_once ROOT . 'vendor/autoload.php';
+}
+
+if (file_exists(ROOT . 'config/config.php')) {
+    require_once ROOT . 'config/config.php';
+}
+
+$request = new \Core\Request();
 
 if (SLACK_TOKEN != $request->get('token')) {
     die('Wrong token.');
 }
 
-$response = new \terenaa\Core\Response\Response($request);
+$response = new \Core\Response\Response($request);
 $response->send();

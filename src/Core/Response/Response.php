@@ -8,15 +8,15 @@
  * file that was distributes with this source code.
  */
 
-namespace terenaa\Core\Response;
+namespace Core\Response;
 
 
-use terenaa\Core\Command\CommandDispatcher;
-use terenaa\Core\Request;
+use Core\Command\CommandDispatcher;
+use Core\Request;
 
 /**
  * Class Response
- * @package terenaa\Core\Response
+ * @package Core\Response
  */
 final class Response
 {
@@ -34,6 +34,11 @@ final class Response
      * @var string
      */
     private $attachmentText;
+
+    /**
+     * @var mixed
+     */
+    private $attachmentColor;
 
     /**
      * @var string
@@ -98,10 +103,13 @@ final class Response
         );
 
         if ($this->attachmentText) {
-            $params['attachments'][]['text'] = $this->attachmentText;
+            $params['attachments'][] = array(
+                'text' => $this->attachmentText,
+                'color' => $this->attachmentColor
+            );
         }
 
-        return $params;
+        return json_encode($params);
     }
 
     /**
@@ -114,7 +122,7 @@ final class Response
         return array(
             CURLOPT_URL => $this->request->get('response_url'),
             CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => json_encode($this->getResponseParams()),
+            CURLOPT_POSTFIELDS => $this->getResponseParams(),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/json'
@@ -137,17 +145,13 @@ final class Response
     /**
      * Sets given response as the response
      *
-     * @param array $response
+     * @param SlackResponse $response
      */
-    protected function setResponse(array $response)
+    protected function setResponse(SlackResponse $response)
     {
-        if (array_key_exists('text', $response)) {
-            $this->responseText = $response['text'];
-        }
-
-        if (array_key_exists('additional', $response)) {
-            $this->attachmentText = $response['additional'];
-        }
+        $this->responseText = $response->getResponseText();
+        $this->attachmentText = $response->getAttachmentText();
+        $this->attachmentColor = $response->getAttachmentColor();
     }
 
     /**

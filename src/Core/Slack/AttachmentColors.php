@@ -8,13 +8,16 @@
  * file that was distributes with this source code.
  */
 
-namespace terenaa\Core\Response;
+namespace Core\Slack;
 
 
 /**
- * Class ResponseException
- * @package terenaa\Core\Response
+ * Class String
+ * @package Core\Slack
  */
-class ResponseException extends \Exception
+final class AttachmentColors
 {
+    const GOOD = 'good';
+    const WARNING = 'warning';
+    const DANGER = 'danger';
 }

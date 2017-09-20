@@ -8,12 +8,12 @@
  * file that was distributes with this source code.
  */
 
-namespace terenaa\Core;
+namespace Core;
 
 
 /**
  * Class Request
- * @package terenaa\Core
+ * @package Core
  */
 final class Request
 {

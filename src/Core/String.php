@@ -8,20 +8,17 @@
  * file that was distributes with this source code.
  */
 
-namespace terenaa\Core\Command;
+namespace Core;
 
 
 /**
- * Class CommandSet
- * @package terenaa\Core\Command
+ * Class String
+ * @package Core
  */
-abstract class CommandSet implements CommandSetInterface
+final class String
 {
-    /**
-     * CommandSet constructor.
-     */
-    final public function __construct()
+    public static function endsWith($haystack, $needle)
     {
-        return $this->getMethods();
+        return substr($haystack, -strlen($needle)) === $needle;
     }
 }

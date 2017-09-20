@@ -8,22 +8,18 @@
  * file that was distributes with this source code.
  */
 
-namespace terenaa\Core\Response;
+namespace Core\Command;
 
 
 /**
- * Class ResponseType
- * @package terenaa\Core\Response
+ * Interface CommandSetInterface
+ * @package Core\Command
  */
-final class ResponseType
+interface CommandSetInterface
 {
-    const IN_CHANNEL = 'in_channel';
-    const EPHEMERAL = 'ephemeral';
-
     /**
-     * ResponseType constructor.
+     * @param string $commandName
+     * @return array
      */
-    private function __construct()
-    {
-    }
+    public function helpAction($commandName = null);
 }
